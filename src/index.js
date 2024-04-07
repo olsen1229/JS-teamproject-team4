@@ -1,19 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const searchBtn = document.getElementById('searchBtn');
-  searchBtn.addEventListener('click', searchEvents);
+  const searchInput = document.getElementById('search');
+  const countryInput = document.getElementById('country');
+
+  searchInput.addEventListener('input', searchEvents);
+  countryInput.addEventListener('input', searchEvents);
+
+  // Initial search when the page loads
+  searchEvents();
 });
 
 function searchEvents() {
-  const searchInput = document.getElementById('search').value.trim();
-  const country = document.getElementById('country').value.trim().toUpperCase();
+  const searchInputValue = document.getElementById('search').value.trim();
+  const countryInputValue = document.getElementById('country').value.trim().toUpperCase();
 
   const apiKey = 'RnnCjDF1qlAegHSfEjgn2nA0R12izNsY';
- let url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}`;
+  let url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}`;
 
-let queryParams = [];
-if (searchInput) queryParams.push(`keyword=${searchInput}`);
-if (country) queryParams.push(`countryCode=${country}`);
-
+  let queryParams = [];
+  if (searchInputValue) queryParams.push(`keyword=${searchInputValue}`);
+  if (countryInputValue) queryParams.push(`countryCode=${countryInputValue}`);
 
   if (queryParams.length > 0) {
     url += `&${queryParams.join('&')}`;
