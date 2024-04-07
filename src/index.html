@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Event Search</title>
-  <link rel="stylesheet" type="text/css" href="./sass/index.scss" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events</title>
+  <link rel="stylesheet" href="./sass/index.scss" />
 </head>
-
 <body>
-  <h1>Event Search</h1>
-  <form id="search-form">
-    <label for="genre">Genre:</label>
-    <input type="text" id="genre" name="genre" />
-    <label for="country">Country:</label>
-    <input type="text" id="country" name="country" />
-    <button type="submit">Search</button>
-  </form>
-  <div id="results"></div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./index.js"></script>
+  <header>
+    <h1>FIND BEST EVENTS AROUND THE WORLD</h1>
+    <form class="search-form" id="search-form">
+      <input class="search-form-input" type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+    </form>
+    <form class="country-form" id="country-form">
+      <input class="country-form-input" type="text" name="countryQuery" autocomplete="off" placeholder="Search images..." />
+    </form>
+  </header>
+
+  <main class="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="gallery">
+          <!-- Image cards -->
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="./index.js" type="module"></script>
 </body>
-
 </html>
-
