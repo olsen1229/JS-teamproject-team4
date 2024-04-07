@@ -16,3 +16,14 @@ img::after {
     width: 100%;
 }
 
+/* Custom styles for event boxes */
+.event-box {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.event-box img {
+    width: 100%;
+    height: auto;
+}
