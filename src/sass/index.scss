@@ -1,2 +1,16 @@
-@import './common';
-@import './example';
+body {
+    font-family: Arial, sans-serif;
+}
+
+#search-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+#results {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}

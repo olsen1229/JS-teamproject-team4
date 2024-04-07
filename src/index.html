@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
-    <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
-  </head>
-  <body>
-    <h1>Example title</h1>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
-  </body>
+<html>
+
+<head>
+  <title>Event Search</title>
+  <link rel="stylesheet" type="text/css" href="./sass/index.scss" />
+</head>
+
+<body>
+  <h1>Event Search</h1>
+  <form id="search-form">
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" />
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country" />
+    <button type="submit">Search</button>
+  </form>
+  <div id="results"></div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./index.js"></script>
+</body>
+
 </html>
+
