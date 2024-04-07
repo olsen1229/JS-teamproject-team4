@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   searchInput.addEventListener('input', searchEvents);
   countryInput.addEventListener('input', searchEvents);
 
-  // Initial search when the page loads
+
   searchEvents();
 });
 
@@ -28,7 +28,7 @@ function searchEvents() {
     .then(response => response.json())
     .then(data => {
       const eventsDiv = document.getElementById('events');
-      eventsDiv.innerHTML = ''; // Clear previous results
+      eventsDiv.innerHTML = ''; 
 
       if (data._embedded && data._embedded.events.length > 0) {
         data._embedded.events.forEach(event => {
