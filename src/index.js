@@ -9,7 +9,7 @@ const eventGallery = document.querySelector('.main-container');
 const selectCountry = document.querySelector('.select')
 const searchCountry = document.querySelector('.input')
 
-
+//=======FETCH DATA FROM API========//
 async function fetchData() { 
   try { 
     const res = await axios.get(BASE_URL, options); 
@@ -25,7 +25,7 @@ async function fetchData() {
   }
 }
 
-
+//=========INSERT MARKUP==========//
 
 function renderEvent(events) {
     const markup = events.map(({ name, images, dates, _embedded : {venues} }) => {
@@ -48,6 +48,7 @@ function renderEvent(events) {
     eventGallery.insertAdjacentHTML("beforeend", markup)
 }
 
+//======== RENDER EVENTS AS PER COUNTRY ===========//
 async function countryEvent(e) {
   eventGallery.innerHTML = "";
   let selectedCountry = e.target.value;
@@ -66,6 +67,7 @@ async function countryEvent(e) {
   }
 }
 
+//=========RENDER EVENTS BY SEARCH ==========//
 async function inputEvent() {
   if (searchCountry.value === "") {
     options.params.keyword = "";
@@ -88,6 +90,7 @@ async function inputEvent() {
 const pageNumbersUl = document.getElementById('page-numbers');
 const currentPageDiv = document.querySelector('.current-page');
 const nums = [...Array(30).keys()].slice(1);
+console.log(nums)
 
 function renderPageNumbers(startIndex) {
     pageNumbersUl.innerHTML = '';
@@ -133,6 +136,46 @@ function renderPageNumbers(startIndex) {
 }
 renderPageNumbers(1);
 
+//========RENDER EVENT PER PAGE======//
+
+const activePage = document.querySelector(".pagination")
+console.log(activePage)
+console.log(currentPageDiv.innerText)
+
+async function renderEventByPage(e) {
+  eventGallery.innerHTML = "";
+  // console.log(e.target.innerText)
+  console.log(e.target.classList.contains('active'))
+  if (e.target.classList.contains('active')) {
+    newPage = e.target.innerText
+    options.params.page = newPage
+    console.log(newPage)
+    try {
+      const res = await axios.get(BASE_URL, options);
+      const { events } = res.data._embedded;
+      renderEvent(events)
+
+    } catch (err) {
+      console.log(err)
+      Notify.failure(`Sorry! No event found!`);
+    }
+  } else {
+    eventGallery.innerHTML = "";
+    Notify.failure(`Please click the page button again!`)
+    try {
+      const res = await axios.get(BASE_URL, options);
+      const { events } = res.data._embedded;
+      renderEvent(events)
+
+    } catch (err) {
+      console.log(err)
+      Notify.failure(`Sorry! No event found!`);
+    }
+  }
+  
+}
+
+activePage.addEventListener("click", renderEventByPage) 
 
 
 

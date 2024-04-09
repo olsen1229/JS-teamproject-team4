@@ -383,3 +383,7 @@ footer span {
     border-radius: 10px 0px 10px 0px;
     border: 1px solid #DC56C5;
 }
+
+.current-page{
+    display: none;
+}
