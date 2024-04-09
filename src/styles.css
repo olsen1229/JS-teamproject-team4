@@ -148,6 +148,7 @@
 
 .header-section {
     background-image: url(./images/pic.png);
+    background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
     display: flex;
@@ -372,6 +373,7 @@ footer span {
     color: #FFFFFF;
     list-style: none;
     padding-top: 5px;
+    cursor: pointer;
 }
 
 .pagination .active{
