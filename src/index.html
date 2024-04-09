@@ -124,6 +124,65 @@
         </div>
       </div>
 
+      <!-- MODAL -->
+      <div class="backdrop is-hidden" data-modal>
+        <div class="event-modal modal-container">
+            <button type="button" class="modal-close-button" data-modal-close>
+                <svg class="button-svg" width="28" height="28">
+                    <use href="./images/icons.svg#close-1"></use>
+                </svg>
+            </button>
+            <img class="circle-event-img" src="https://picsum.photos/200">
+            <div class = "event info-container">
+              <img class="event-img" src="https://picsum.photos/200">
+                <div class="event-info">
+                  <div class="event-info-item">
+                    <h3 h3 class="info-heading">INFO</h3>
+                    <p class="info-description">Atlas Weekend is the largest music festival <br> in Ukraine. More than 200 artists will create <br> a proper music
+                    festival
+                    atmosphere on 10 <br> stages</p>
+                  </div>
+                  <div class="event-info-item">
+                    <h3 class="info-heading">WHEN</h3>
+                    <p class="info-description">2021-06-09 <br>
+                      20:00 (Kyiv/Ukraine)</p>
+                  </div>
+                  <div class="event-info-item">
+                    <h3 class="info-heading">WHERE</h3>
+                    <p class="info-description">Kyiv, Ukraine <br>
+                    VDNH</p>
+                  </div>
+                </div>
+            </div>
+                <div class="artist-info">
+                  <div class="artist-info-item">
+                    <h3 class="info-heading">WHO</h3>
+                    <p class="info-description">The Black Eyed Peas</p>
+                  </div>
+                </div>
+                <div class="ticket-info">
+                  <div class="ticket-info-item">
+                    <h3 class="info-heading">PRICES</h3>
+                    <div class="ticket-prices">
+                      <img src="./images/ticket.png" alt="ticket barcode" class="barcode-image">
+                      <p class="info-description">Standard 300-500 UAH</p>
+                      <img src="./images/ticket.png" alt="ticket barcode" class="barcode-image">
+                      <p class="info-description">VIP 1000-1500 UAH</p>
+                    </div>
+                    <button type="button" class="buy-button">BUY TICKETS</button>
+                    <button type="button" class="buy-button">BUY TICKETS</button>
+                  </div>
+                    <button type="button" class="more-button">MORE FROM THIS AUTHOR</button>
+                </div>
+
+                                         
+        </div>
+
+      </div>
+
+
+
+      
       <div class="pagination">
         <ul class="pagination-list list">
           <li class="active">1</li>
@@ -146,6 +205,7 @@
   </div>
 
   <script type="module" src="./index.js"></script>
+  <script src="modal.js"></script>
 </body>
 
 </html>

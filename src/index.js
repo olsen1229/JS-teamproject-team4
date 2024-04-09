@@ -10,6 +10,7 @@ const selectCountry = document.querySelector('.select')
 const searchCountry = document.querySelector('.input')
 
 
+
 async function fetchData() { 
   try { 
     const res = await axios.get(BASE_URL, options); 
@@ -30,7 +31,7 @@ async function fetchData() {
 function renderEvent(events) {
     const markup = events.map(({ name, images, dates, _embedded : {venues} }) => {
         return `
-                <a class="card">
+                <a class="card" data-modal-open="">
                         <div class="second-border"></div>
                         <img src="${images[0].url}" alt="sample pic" class="card-img">
                         <h5 class="event-name">${name}</h5>
@@ -88,3 +89,31 @@ selectCountry.addEventListener("change", countryEvent)
 searchCountry.addEventListener("input", throttle(inputEvent, 1500))
 
 fetchData()
+
+// MODAL JS
+function openModalFunction() {
+  const modal = document.querySelector('.backdrop');
+  if (modal) {
+    modal.classList.remove('is-hidden');
+  }
+}
+
+function closeModalFunction() {
+  const closeButton = document.querySelector('.modal-close-button');
+  if (closeButton) {
+    closeButton.addEventListener('click', function() {
+      const modal = document.querySelector('.backdrop');
+      if (modal) {
+        modal.classList.add('is-hidden');
+      }
+    });
+  }
+}
+
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('card-img')) {
+    openModalFunction(); 
+  }
+});
+
+closeModalFunction();
