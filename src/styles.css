@@ -18,6 +18,16 @@
     }
 
     .main-container {
+    h1{
+            font-size: 50px;
+            line-height: 60.95px;
+    }
+
+    .header-section{
+        height: 446px;
+    }
+
+    .main-container{
         max-width: 946px;
         gap: 50px;
     }
@@ -53,7 +63,7 @@
 }
 
 @media (max-width: 1279px) {
-    h1 {
+    h1{
         font-size: 30px;
         line-height: 36.57px;
     }

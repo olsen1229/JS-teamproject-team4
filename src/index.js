@@ -25,7 +25,6 @@ async function fetchData() {
 }
 
 
-
 function renderEvent(events) {
     const markup = events.map(({ name, images, dates, _embedded : {venues} }) => {
         return `
