@@ -18,16 +18,6 @@
     }
 
     .main-container {
-    h1{
-            font-size: 50px;
-            line-height: 60.95px;
-    }
-
-    .header-section{
-        height: 446px;
-    }
-
-    .main-container{
         max-width: 946px;
         gap: 50px;
     }
@@ -63,7 +53,7 @@
 }
 
 @media (max-width: 1279px) {
-    h1{
+    h1 {
         font-size: 30px;
         line-height: 36.57px;
     }
@@ -158,6 +148,7 @@
 
 .header-section {
     background-image: url(./images/pic.png);
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -383,6 +374,7 @@ footer span {
     color: #FFFFFF;
     list-style: none;
     padding-top: 5px;
+    cursor: pointer;
 }
 
 .pagination .active {
@@ -391,6 +383,10 @@ footer span {
     height: 30px;
     border-radius: 10px 0px 10px 0px;
     border: 1px solid #DC56C5;
+}
+
+.current-page {
+    display: none;
 }
 
 /* MODAL STYLES */
