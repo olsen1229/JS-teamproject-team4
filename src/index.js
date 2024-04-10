@@ -9,8 +9,6 @@ const eventGallery = document.querySelector('.main-container');
 const selectCountry = document.querySelector('.select')
 const searchCountry = document.querySelector('.input')
 
-
-
 async function fetchData() { 
   try { 
     const res = await axios.get(BASE_URL, options); 
