@@ -76,6 +76,8 @@
 
     .more-button{
         margin-left: 326px;
+        margin-bottom: 50px;
+        width: 255px;
     }
 
     .backdrop-container {
@@ -94,6 +96,15 @@
     .ticket-info {
         margin-top: 10px;
         margin-left: 65px;
+    }
+
+    .buy-button{
+        margin-right: 120px;
+    }
+
+
+    .ticket-prices{
+        justify-content: start;
     }
 }
 
@@ -167,6 +178,8 @@
     
     .more-button {
         margin-left: 157px;
+        width: 255px;
+        margin-bottom: 50px;
     }
 
     .backdrop-container {
@@ -185,6 +198,14 @@
     .ticket-info {
         margin-top: 10px;
         margin-left: 65px;
+    }
+
+    .buy-button {
+        margin-right: 120px;
+    }
+
+    .ticket-prices {
+        justify-content: start;
     }
 }
 
@@ -268,6 +289,17 @@
     .ticket-info {
         margin-top: 10px;
         margin-left: 0;
+        width: 240px;
+    }
+
+    .buy-button {
+        margin-right: 0;
+    }
+
+    .more-button {
+        width: 230px;
+        margin-left: 0;
+        margin-bottom: 111px;
     }
 }
 
@@ -573,7 +605,7 @@ footer span {
 
 .circle-event-img {
     border-radius: 100%;
-
+    object-fit: cover;
     margin-bottom: 15px;
 }
 
@@ -606,6 +638,7 @@ footer span {
 
 .ticket-prices {
     display: flex;
+
 }
 
 .barcode-image {
@@ -622,14 +655,13 @@ footer span {
     background-color: #4C00FE;
     border: none;
     margin-top: 10px;
-    margin-right: 120px;
+
     font-size: 14px;
 }
 
 .more-button {
     margin-top: 30px;
     height: 40px;
-    width: 255px;
     border-radius: 5px;
     font-family: inherit;
     font-weight: 500;
@@ -637,6 +669,5 @@ footer span {
     color: #4C00FE;
     background-color: #FFF2FD;
     border: 1px solid #4C00FE;
-    margin-bottom: 50px;
 }
 

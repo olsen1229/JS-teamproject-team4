@@ -140,8 +140,6 @@ async function renderEventByPage(e) {
         Notify.failure(`Sorry! No event found!`);
         
     }
-    // console.log(fetchData())
-    fetchModalData()
   } else {
     eventGallery.innerHTML = "";
     Notify.failure(`Please click the page button again!`)
@@ -203,21 +201,25 @@ document.addEventListener('click', function (event) {
     options.params.id = eventId;
     // fetchData()
     // options.params.page = 1
-    fetchModalData();
+    let currentPage = options.params.page;
+    fetchModalData(currentPage);
     openModalFunction(); 
   }
 });
 
 
-async function fetchModalData() { 
+async function fetchModalData(currentPage) { 
   // options.params.page = 1;
   try { 
+    options.params.page = 0;
     const res = await axios.get(BASE_URL, options); 
     console.log(res)
     const { events } = res.data._embedded;
     // console.log(events)
     // fetchData()
     addModalMarkup(events)
+    options.params.page = currentPage;
+    options.params.id = '';
     // renderEvent(events)
 
   } catch (err) { 
