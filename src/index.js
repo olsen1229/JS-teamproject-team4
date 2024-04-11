@@ -13,10 +13,11 @@ const searchCountry = document.querySelector('.input')
 async function fetchData() { 
   try { 
     const res = await axios.get(BASE_URL, options); 
-      console.log(res.data)
     const { events } = res.data._embedded;
-    console.log(events); 
-      renderEvent(events)
+    // console.log(events)
+    const { page } = res.data;
+    // console.log(page.number)
+    renderEvent(events)
 
   } catch (err) { 
       console.log(err)
@@ -28,43 +29,30 @@ async function fetchData() {
 //=========INSERT MARKUP==========//
 
 function renderEvent(events) {
-    const markup = events.map(({ name, images, dates, _embedded : {venues} }) => {
+    const markup = events.map(({ name, id, images, dates, _embedded : {venues} }) => {
         return `
-                <a class="card">
+                <a class="card" >
                         <div class="second-border"></div>
-                        <img src="${images[0].url}" alt="sample pic" class="card-img">
+                        <img src="${images[0].url}" alt="sample pic" class="card-img" id="${id}">
                         <h5 class="event-name">${name}</h5>
                         <div class="event-info"><p class="date">${dates.start.localDate}</p>
                           <p class="location">
                               <img src="/location-icon.b3919cfb.png" alt="location icon" class="location-icon">
                               ${venues[0].name}
                           </p></div>
-                          
-                        
                     </a>
                 `;
     }).join("")
 
-    eventGallery.insertAdjacentHTML("beforeend", markup)
+  eventGallery.insertAdjacentHTML("beforeend", markup)
 }
 
 //======== RENDER EVENTS AS PER COUNTRY ===========//
 async function countryEvent(e) {
   eventGallery.innerHTML = "";
   let selectedCountry = e.target.value;
-  console.log(e.target.value)
   options.params.countryCode = selectedCountry
-  console.log(selectedCountry)
-  try {
-    const res = await axios.get(BASE_URL, options);
-    const { events } = res.data._embedded;
-    console.log(events)
-    renderEvent(events)
-  } catch (err) { 
-      console.log(err)
-      Notify.failure(`Sorry! No event found!`)
-        
-  }
+  fetchData()
 }
 
 //=========RENDER EVENTS BY SEARCH ==========//
@@ -74,23 +62,14 @@ async function inputEvent() {
     fetchData()
   } eventGallery.innerHTML = "" 
   options.params.keyword = searchCountry.value
-  // console.log(searchCountry.value)
-  try { 
-    const res = await axios.get(BASE_URL, options); 
-      const { events } = res.data._embedded;
-      renderEvent(events)
 
-  } catch (err) { 
-    console.log(err)
-    Notify.failure(`Sorry! No event found!`);
-  }
+  fetchData()
 }
 
 // ==========PAGINATION ===========//
 const pageNumbersUl = document.getElementById('page-numbers');
 const currentPageDiv = document.querySelector('.current-page');
 const nums = [...Array(30).keys()].slice(1);
-console.log(nums)
 
 function renderPageNumbers(startIndex) {
     pageNumbersUl.innerHTML = '';
@@ -145,32 +124,29 @@ console.log(currentPageDiv.innerText)
 async function renderEventByPage(e) {
   eventGallery.innerHTML = "";
   // console.log(e.target.innerText)
-  console.log(e.target.classList.contains('active'))
   if (e.target.classList.contains('active')) {
-    newPage = e.target.innerText
-    options.params.page = newPage
+    let newPage = e.target.innerText
     console.log(newPage)
-    try {
-      const res = await axios.get(BASE_URL, options);
+    options.params.page = newPage
+    try { 
+      const res = await axios.get(BASE_URL, options); 
       const { events } = res.data._embedded;
+      const { page } = res.data;
       renderEvent(events)
 
-    } catch (err) {
-      console.log(err)
-      Notify.failure(`Sorry! No event found!`);
+
+    } catch (err) { 
+        console.log(err)
+        Notify.failure(`Sorry! No event found!`);
+        
     }
+    // console.log(fetchData())
+    fetchModalData()
   } else {
     eventGallery.innerHTML = "";
     Notify.failure(`Please click the page button again!`)
-    try {
-      const res = await axios.get(BASE_URL, options);
-      const { events } = res.data._embedded;
-      renderEvent(events)
 
-    } catch (err) {
-      console.log(err)
-      Notify.failure(`Sorry! No event found!`);
-    }
+    fetchData()
   }
   
 }
@@ -183,3 +159,122 @@ selectCountry.addEventListener("change", countryEvent)
 searchCountry.addEventListener("input", throttle(inputEvent, 1500))
 
 fetchData()
+
+
+
+// MODAL JS
+const modalContainer = document.querySelector(".modal-container")
+  
+  
+function openModalFunction() {
+  const modal = document.querySelector('.backdrop');
+  if (modal) {
+    // modalContainer.innerHTML = "";
+    modal.classList.remove('is-hidden');
+  }
+}
+
+function closeModalFunction() {
+  console.log("entered")
+  const closeButton = document.querySelector('.modal-close-button');
+  console.log(closeButton)
+  if (closeButton) {
+    console.log("entered")
+    closeButton.addEventListener('click', function() {
+      const modal = document.querySelector('.backdrop');
+      if (modal) {
+        options.params.id = "";
+        modalContainer.innerHTML = ""; //problem
+        modal.classList.add('is-hidden');
+        // fetchData()
+      }
+    });
+  }
+
+}
+
+
+document.addEventListener('click', function (event) {
+  // options.params.id = "";
+  const eventId = event.target.getAttribute("id")
+  console.log(event.target)
+  if (event.target.classList.contains('card-img')) {
+    console.log(eventId)
+    options.params.id = eventId;
+    // fetchData()
+    // options.params.page = 1
+    fetchModalData();
+    openModalFunction(); 
+  }
+});
+
+
+async function fetchModalData() { 
+  // options.params.page = 1;
+  try { 
+    const res = await axios.get(BASE_URL, options); 
+    console.log(res)
+    const { events } = res.data._embedded;
+    // console.log(events)
+    // fetchData()
+    addModalMarkup(events)
+    // renderEvent(events)
+
+  } catch (err) { 
+      console.log(err)
+      Notify.failure(`Error fetchModalData Function!`);
+      
+  }
+}
+
+function addModalMarkup(events) {
+  console.log(events)
+  console.log(events[0].dates.start.localDate)
+  //   modalContainer.insertAdjacentHTML("beforeend", closeButtonMarkup)
+  // const modalMarkup = events.map(({ name, images, dates, _embedded: { venues } }) => {
+  const modalMarkup = `
+                      <img class="circle-event-img" src="${events[0].images[0].url}">
+                      <div class="event info-container">
+                          <img class="event-img" src="${events[0].images[0].url}">
+                          <div class="event-info">
+                              <div class="event-info-item">
+                                  <h3 h3 class="info-heading">INFO</h3>
+                                  <p class="info-description event-info-description">Atlas Weekend is the largest music festival. <br>
+                                      More than 200 artists will create a proper music
+                                      festival atmosphere on 10 stages</p>
+                              </div>
+                              <div class="event-info-item">
+                                  <h3 class="info-heading">WHEN</h3>
+                                  <p class="info-description date-info-description">${events[0].dates.start.localDate}</p>
+                                  <p class="info-description timezone-info-description">${events[0].dates.start.localTime} (${events[0]._embedded.venues[0].city.name}/${events[0]._embedded.venues[0].country.name})</p>
+                              </div>
+                              <div class="event-info-item">
+                                  <h3 class="info-heading">WHERE</h3>
+                                  <p class="info-description country-info-description">${events[0]._embedded.venues[0].city.name}/${events[0]._embedded.venues[0].country.name}</p>
+                                  <p class="info-description venue-info-description">${events[0]._embedded.venues[0].name}</p>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="artist-info">
+                          <div class="artist-info-item">
+                              <h3 class="info-heading">WHO</h3>
+                              <p class="info-description artist-name">${events[0].name}</p>
+                          </div>
+                      </div>
+                      <div class="ticket-info">
+                          <div class="ticket-info-item">
+                              <h3 class="info-heading">PRICES</h3>
+                              <div class="ticket-prices">
+                                  <img src="/ticket.e2f575a5.png" alt="ticket barcode" class="barcode-image">
+                                  <p class="info-description standard-ticket-price">Standard ${events[0].priceRanges[0].min}-${events[0].priceRanges[0].max} ${events[0].priceRanges[0].currency}</p>
+                              </div>
+                              <button type="button" class="buy-button">BUY TICKETS</button>
+                          </div>
+                          <button type="button" class="more-button">MORE FROM THIS AUTHOR</button>
+                      </div>
+                      `;
+  modalContainer.insertAdjacentHTML("beforeend", modalMarkup)
+  // return modalMarkup
+}
+
+closeModalFunction();
