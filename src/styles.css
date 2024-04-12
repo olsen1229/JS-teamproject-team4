@@ -87,11 +87,12 @@
     }
 
     .backdrop-container {
-        display: flex;
+        /* display: flex; */
         justify-content: center;
         width: 1000px;
         height: 100%;
         position: relative;
+        overflow-y: auto;
     }
 
     .info-description {
@@ -194,11 +195,12 @@
     }
 
     .backdrop-container {
-        display: flex;
+        /* display: flex; */
         justify-content: center;
         width: 704px;
         height: 100%;
         position: relative;
+        overflow-y: auto;
     }
 
     .info-description {
@@ -286,11 +288,12 @@
     }
 
     .backdrop-container {
-        display: flex;
+        /* display: flex; */
         justify-content: center;
         width: 280px;
         height: 100%;
         position: relative;
+        overflow-y: auto;
     }
 
     
@@ -329,7 +332,6 @@
 }
 
 .header-container{
-    /* width: 1280px; */
     margin: auto;
 }
 
@@ -578,7 +580,7 @@ footer span {
 
 /* MODAL STYLES */
 .modal-container {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
 }
 
 .backdrop {
@@ -595,12 +597,12 @@ footer span {
 
 .event-modal {
     background-color: #FFF2FD;
-    position: fixed;
+    /* position: fixed; */
     top: 90px;
     align-items: center;
     justify-content: center;
     z-index: 5;
-
+    margin-top: 100px;
 }
 
 .is-hidden {
@@ -686,3 +688,7 @@ footer span {
     background-color: #FFF2FD;
     border: 1px solid #4C00FE;
 }
+
+/* body.modal-open{
+    overflow: hidden;
+} */
