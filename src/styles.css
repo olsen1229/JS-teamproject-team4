@@ -17,6 +17,12 @@
         height: 446px;
     }
 
+    .logo {
+        width: 300px;
+        height: 250px;
+
+    }
+
     .main-container{
         max-width: 946px;
         gap: 50px;
@@ -120,6 +126,11 @@
         height: 364px;
     }
 
+    .logo {
+        width: 200px;
+        height: 175px;
+    }
+
     .main-container {
         max-width: 768px;
         gap: 50px;
@@ -216,6 +227,11 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+
+    .logo {
+        width: 150px;
+        height: 125px;
     }
 
     .card-img {
@@ -670,4 +686,3 @@ footer span {
     background-color: #FFF2FD;
     border: 1px solid #4C00FE;
 }
-
